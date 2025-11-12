@@ -4,8 +4,12 @@ Serves the React frontend and provides API endpoints if needed
 """
 
 from flask import Flask, render_template, send_from_directory, jsonify
+from dotenv import load_dotenv
+load_dotenv()  # reads values from .env
 from flask_cors import CORS
 import os
+
+load_dotenv()
 
 app = Flask(__name__, 
             static_folder='dist',
