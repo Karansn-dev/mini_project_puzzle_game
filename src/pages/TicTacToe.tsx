@@ -134,7 +134,7 @@ const TicTacToe = () => {
             Home
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold gradient-rainbow bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
           Tic Tac Toe
         </h1>
         <Button

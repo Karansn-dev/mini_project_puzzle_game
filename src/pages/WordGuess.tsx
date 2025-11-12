@@ -118,7 +118,7 @@ const WordGuess = () => {
             Home
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold gradient-candy bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500 via-rose-400 to-yellow-400 bg-clip-text text-transparent">
           Word Guessing
         </h1>
         <Button

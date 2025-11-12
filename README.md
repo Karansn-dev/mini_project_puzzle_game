@@ -59,6 +59,99 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Firebase (Authentication & Firestore)
+- Three.js (3D animations)
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```sh
+npm install
+```
+
+**Required packages:**
+- `firebase` - For authentication and database
+- `three` - For 3D background animations
+- `@types/three` - TypeScript types for Three.js
+
+If these aren't installed, run:
+```sh
+npm install firebase three @types/three
+```
+
+### 2. Firebase Configuration
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project or select an existing one
+3. Enable **Authentication**:
+   - Go to Authentication > Sign-in method
+   - Enable **Google** sign-in provider
+   - Enable **Email/Password** sign-in provider
+4. Enable **Firestore Database**:
+   - Go to Firestore Database
+   - Create database in production mode (or test mode for development)
+   - Set up security rules (see below)
+5. Get your Firebase config:
+   - Go to Project Settings > General
+   - Scroll to "Your apps" section
+   - Click the web icon (</>) to add a web app
+   - Copy the `firebaseConfig` object
+
+6. Update `src/config/firebaseConfig.ts`:
+   ```typescript
+   const firebaseConfig = {
+     apiKey: "YOUR_API_KEY",
+     authDomain: "YOUR_AUTH_DOMAIN",
+     projectId: "YOUR_PROJECT_ID",
+     storageBucket: "YOUR_STORAGE_BUCKET",
+     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+     appId: "YOUR_APP_ID",
+   };
+   ```
+
+### 3. Firestore Security Rules
+
+Set up these security rules in Firestore:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
+### 4. Run the Development Server
+
+```sh
+npm run dev
+```
+
+The app will be available at `http://localhost:8080`
+
+## Features
+
+- 🔐 **Firebase Authentication**: Google Sign-In and Email/Password
+- 🎮 **6 Interactive Games**:
+  - Tic Tac Toe
+  - Number Guessing
+  - Word Guessing
+  - Memory Match (NEW)
+  - Puzzle Time (NEW)
+  - Sudoku (NEW)
+- 🎯 **Game Features**:
+  - 3 difficulty levels (Easy, Medium, Hard)
+  - Play with Computer or Friend modes
+  - Real-time stats tracking
+  - Progress saved to Firestore
+- 🌓 **Dark/Light Mode**: Toggle theme with the button in navbar
+- ✨ **Three.js Animations**: Futuristic 3D particle background
+- 📊 **User Profile**: View your game statistics and achievements
+- 🎨 **Modern UI**: Glassmorphism, neon gradients, smooth animations
 
 ## How can I deploy this project?
 

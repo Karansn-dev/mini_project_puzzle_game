@@ -96,7 +96,7 @@ const NumberGuess = () => {
             Home
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold gradient-ocean bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
           Number Guessing
         </h1>
         <Button
