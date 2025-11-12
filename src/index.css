@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 250 100% 98%;
+    --foreground: 260 80% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 80% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 80% 20%;
+
+    --primary: 280 85% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 90% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 250 40% 95%;
+    --muted-foreground: 260 30% 50%;
+
+    --accent: 340 85% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 150 70% 55%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 35 100% 60%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 30% 90%;
+    --input: 250 30% 90%;
+    --ring: 280 85% 60%;
+
+    --radius: 1rem;
+    
+    /* Playful gradients */
+    --gradient-rainbow: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-candy: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-ocean: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-forest: linear-gradient(135deg, #30cfd0 0%, #a8e063 100%);
+    
+    /* Shadows */
+    --shadow-playful: 0 10px 30px -5px rgba(102, 126, 234, 0.3);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.1);
+    
+    /* Animations */
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 260 60% 12%;
+    --foreground: 250 100% 98%;
+
+    --card: 260 50% 18%;
+    --card-foreground: 250 100% 98%;
+
+    --popover: 260 50% 18%;
+    --popover-foreground: 250 100% 98%;
+
+    --primary: 280 85% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 85% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 260 40% 25%;
+    --muted-foreground: 250 30% 70%;
+
+    --accent: 340 85% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 150 65% 60%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 35 95% 65%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 80% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 30% 30%;
+    --input: 260 30% 30%;
+    --ring: 280 85% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Fredoka',sans-serif];
+  }
+}
+
+@layer utilities {
+  .gradient-rainbow {
+    background: var(--gradient-rainbow);
+  }
+  
+  .gradient-candy {
+    background: var(--gradient-candy);
+  }
+  
+  .gradient-ocean {
+    background: var(--gradient-ocean);
+  }
+  
+  .gradient-sunset {
+    background: var(--gradient-sunset);
+  }
+  
+  .gradient-forest {
+    background: var(--gradient-forest);
+  }
+  
+  .shadow-playful {
+    box-shadow: var(--shadow-playful);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.6s var(--transition-bounce);
+  }
+  
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
