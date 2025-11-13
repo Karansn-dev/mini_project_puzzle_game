@@ -65,23 +65,23 @@ const Index = () => {
       <div className="relative z-10">
 
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-12 text-center">
+        <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
           <div className="animate-bounce-in">
             <div className="inline-block">
-              <Sparkles className="w-16 h-16 text-accent mx-auto mb-4 animate-float" />
+              <Sparkles className="w-12 h-12 sm:w-16 sm:h-16 text-accent mx-auto mb-4 animate-float" />
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent px-4">
               Welcome to Futuristic Games!
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 px-4">
               Choose your favorite game and let's play! 🎮
             </p>
           </div>
         </section>
 
         {/* Games Grid */}
-        <section className="container mx-auto px-4 pb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <section className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {games.map((game, index) => (
               <Card
                 key={game.id}
@@ -96,23 +96,23 @@ const Index = () => {
                   to={game.disabled ? "#" : game.path}
                   className={`block ${game.disabled ? "pointer-events-none" : ""}`}
                 >
-                  <div className={`${game.gradient} p-6 text-center relative`}>
+                  <div className={`${game.gradient} p-4 sm:p-6 text-center relative`}>
                     <div className="absolute top-2 right-2">
-                      <Star className="w-5 h-5 text-white/80" />
+                      <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
                     </div>
-                    <div className="text-6xl mb-4 group-hover:animate-wiggle">
+                    <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4 group-hover:animate-wiggle">
                       {game.icon}
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
                       {game.title}
                     </h3>
-                    <p className="text-white/90 text-sm mb-4">
+                    <p className="text-white/90 text-xs sm:text-sm mb-3 sm:mb-4">
                       {game.description}
                     </p>
                     <Button
                       variant="secondary"
                       size="lg"
-                      className="w-full font-semibold text-lg rounded-full"
+                      className="w-full font-semibold text-base sm:text-lg rounded-full"
                       disabled={game.disabled}
                     >
                       {game.disabled ? "Coming Soon!" : "Play Now!"}
@@ -125,8 +125,8 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-4 py-8 text-center border-t border-border/50">
-          <p className="text-muted-foreground">
+        <footer className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center border-t border-border/50">
+          <p className="text-sm sm:text-base text-muted-foreground">
             Have fun playing! Made with ❤️ for gamers
           </p>
         </footer>

@@ -190,18 +190,18 @@ const PuzzleTime = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <ThreeBackground />
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <Link to="/">
-            <Button variant="outline" className="gap-2">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 mb-4 sm:mb-6">
+          <Link to="/" className="w-full sm:w-auto">
+            <Button variant="outline" className="gap-2 w-full sm:w-auto text-sm">
               <Home className="w-4 h-4" />
               Home
             </Button>
           </Link>
-          <div className="flex gap-4 items-center">
-            <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+            <div className="flex gap-2 flex-1 sm:flex-initial">
               <Select value={difficulty} onValueChange={(v) => setDifficulty(v as Difficulty)} disabled={gameStarted}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-full sm:w-32 text-xs sm:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -211,7 +211,7 @@ const PuzzleTime = () => {
                 </SelectContent>
               </Select>
               <Select value={mode} onValueChange={(v) => setMode(v as GameMode)} disabled={gameStarted}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full sm:w-40 text-xs sm:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -220,44 +220,46 @@ const PuzzleTime = () => {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={initializeGame} className="gap-2">
+            <Button onClick={initializeGame} className="gap-2 text-sm whitespace-nowrap">
               {gameStarted ? (
                 <>
                   <RotateCcw className="w-4 h-4" />
-                  Restart
+                  <span className="hidden sm:inline">Restart</span>
+                  <span className="sm:hidden">Restart</span>
                 </>
               ) : (
                 <>
                   <Shuffle className="w-4 h-4" />
-                  Start Game
+                  <span className="hidden sm:inline">Start Game</span>
+                  <span className="sm:hidden">Start</span>
                 </>
               )}
             </Button>
           </div>
         </div>
 
-        <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl p-6 mb-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
             <div>
-              <p className="text-sm text-muted-foreground">Moves</p>
-              <p className="text-2xl font-bold">{moves}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Moves</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold">{moves}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Time</p>
-              <p className="text-2xl font-bold flex items-center justify-center gap-1">
-                <Clock className="w-5 h-5" />
+              <p className="text-xs sm:text-sm text-muted-foreground">Time</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold flex items-center justify-center gap-1">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
                 {formatTime(time)}
               </p>
             </div>
             {mode === "friend" && (
               <>
                 <div>
-                  <p className="text-sm text-muted-foreground">Current Player</p>
-                  <p className="text-2xl font-bold">{currentPlayer === "player1" ? "Player 1" : "Player 2"}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Current Player</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold truncate">{currentPlayer === "player1" ? "Player 1" : "Player 2"}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Player 1 Score</p>
-                  <p className="text-2xl font-bold">{scores.player1}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Player 1 Score</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold">{scores.player1}</p>
                 </div>
               </>
             )}
@@ -265,17 +267,17 @@ const PuzzleTime = () => {
         </Card>
 
         {gameWon && (
-          <Card className="bg-success/20 border-success mb-6 text-center p-6">
-            <Trophy className="w-16 h-16 text-success mx-auto mb-4" />
-            <h2 className="text-3xl font-bold mb-2">Puzzle Solved! 🎉</h2>
-            <p className="text-lg">Completed in {formatTime(time)} with {moves} moves!</p>
+          <Card className="bg-success/20 border-success mb-4 sm:mb-6 text-center p-4 sm:p-6">
+            <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-success mx-auto mb-4" />
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Puzzle Solved! 🎉</h2>
+            <p className="text-sm sm:text-base md:text-lg">Completed in {formatTime(time)} with {moves} moves!</p>
           </Card>
         )}
 
         {gameStarted && (
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-full sm:max-w-2xl mx-auto overflow-hidden">
             <div
-              className="grid gap-2 bg-card/60 backdrop-blur-sm p-4 rounded-lg border-2"
+              className="grid gap-1 sm:gap-2 bg-card/60 backdrop-blur-sm p-2 sm:p-4 rounded-lg border-2"
               style={{
                 gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
               }}
@@ -285,7 +287,7 @@ const PuzzleTime = () => {
                   key={index}
                   onClick={() => handleTileClick(index)}
                   disabled={value === 0 || gameWon || !canMove(index)}
-                  className={`aspect-square rounded-lg text-2xl font-bold transition-all duration-300 ${
+                  className={`aspect-square rounded-md sm:rounded-lg text-base sm:text-lg md:text-xl lg:text-2xl font-bold transition-all duration-300 ${
                     value === 0
                       ? "bg-transparent border-0 cursor-default"
                       : canMove(index) && !gameWon
@@ -301,12 +303,12 @@ const PuzzleTime = () => {
         )}
 
         {!gameStarted && (
-          <Card className="bg-card/80 backdrop-blur-xl border-2 text-center p-12 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Puzzle Time</h2>
-            <p className="text-muted-foreground mb-6">
+          <Card className="bg-card/80 backdrop-blur-xl border-2 text-center p-6 sm:p-8 md:p-12 max-w-2xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">Puzzle Time</h2>
+            <p className="text-sm sm:text-base text-muted-foreground mb-6">
               Slide the tiles to arrange them in numerical order from 1 to {gridSize * gridSize - 1}. The empty space is at the bottom right.
             </p>
-            <div className="space-y-2 text-left max-w-md mx-auto">
+            <div className="space-y-2 text-left max-w-md mx-auto text-sm sm:text-base">
               <p><strong>Easy:</strong> 3x3 grid (8 tiles)</p>
               <p><strong>Medium:</strong> 4x4 grid (15 tiles)</p>
               <p><strong>Hard:</strong> 5x5 grid (24 tiles)</p>

@@ -50,13 +50,13 @@ const Profile = () => {
 
   const StatCard = ({ title, value, icon: Icon }: { title: string; value: string | number; icon: any }) => (
     <Card className="bg-card/60 backdrop-blur-sm border-2">
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">{title}</p>
-            <p className="text-2xl font-bold mt-2">{value}</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs sm:text-sm text-muted-foreground truncate">{title}</p>
+            <p className="text-xl sm:text-2xl font-bold mt-2 truncate">{value}</p>
           </div>
-          <Icon className="w-8 h-8 text-primary" />
+          <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary flex-shrink-0 ml-2" />
         </div>
       </CardContent>
     </Card>
@@ -73,39 +73,40 @@ const Profile = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <ThreeBackground />
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="mb-6">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="mb-4 sm:mb-6">
           <Link to="/">
-            <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2 text-sm sm:text-base">
               <Home className="w-4 h-4" />
-              Back to Home
+              <span className="hidden sm:inline">Back to Home</span>
+              <span className="sm:hidden">Home</span>
             </Button>
           </Link>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl mb-6">
-            <CardHeader>
-              <CardTitle className="text-3xl bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+          <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl mb-4 sm:mb-6">
+            <CardHeader className="px-4 sm:px-6 pt-6">
+              <CardTitle className="text-2xl sm:text-3xl bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
                 Profile
               </CardTitle>
-              <CardDescription>Your gaming statistics and achievements</CardDescription>
+              <CardDescription className="text-sm sm:text-base">Your gaming statistics and achievements</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-4 sm:px-6 pb-6">
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Name</p>
-                  <p className="text-xl font-semibold">{currentUser?.displayName || "User"}</p>
+                  <p className="text-lg sm:text-xl font-semibold break-words">{currentUser?.displayName || "User"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="text-xl font-semibold">{currentUser?.email}</p>
+                  <p className="text-lg sm:text-xl font-semibold break-all">{currentUser?.email}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 sm:mb-6">
             <StatCard
               title="Memory Match"
               value={stats.memoryMatch?.bestScore || 0}
@@ -124,15 +125,15 @@ const Profile = () => {
           </div>
 
           <Card className="bg-card/80 backdrop-blur-xl border-2">
-            <CardHeader>
-              <CardTitle>Game Statistics</CardTitle>
+            <CardHeader className="px-4 sm:px-6 pt-6">
+              <CardTitle className="text-xl sm:text-2xl">Game Statistics</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-4 sm:px-6 pb-6">
               <div className="space-y-4">
                 {Object.entries(stats).map(([game, gameStats]) => (
                   <div key={game} className="border-b pb-4 last:border-0">
-                    <h3 className="font-semibold text-lg capitalize mb-2">{game}</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <h3 className="font-semibold text-base sm:text-lg capitalize mb-2">{game}</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm">
                       {gameStats.bestScore && (
                         <div>
                           <p className="text-muted-foreground">Best Score</p>

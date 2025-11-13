@@ -125,48 +125,49 @@ const TicTacToe = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 overflow-x-hidden">
       {/* Header */}
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <Link to="/">
-          <Button variant="outline" size="lg" className="gap-2 rounded-full">
-            <Home className="w-5 h-5" />
-            Home
+          <Button variant="outline" size="sm" className="gap-2 rounded-full text-xs sm:text-sm">
+            <Home className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">Home</span>
           </Button>
         </Link>
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent text-center">
           Tic Tac Toe
         </h1>
         <Button
           variant="outline"
-          size="lg"
+          size="sm"
           onClick={resetGame}
-          className="gap-2 rounded-full"
+          className="gap-2 rounded-full text-xs sm:text-sm"
         >
-          <RotateCcw className="w-5 h-5" />
-          New Game
+          <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="hidden sm:inline">New Game</span>
+          <span className="sm:hidden">New</span>
         </Button>
       </header>
 
       {/* Game Area */}
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
-        <Card className="p-8 shadow-playful bg-white/80 backdrop-blur">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8 max-w-2xl">
+        <Card className="p-4 sm:p-6 md:p-8 shadow-playful bg-white/80 backdrop-blur">
           {/* Status */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             {winner ? (
               <div className="animate-bounce-in">
-                <Trophy className="w-16 h-16 text-warning mx-auto mb-4" />
-                <h2 className="text-4xl font-bold text-primary mb-2">
+                <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-warning mx-auto mb-4" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-2">
                   {winner === "X" ? "You Won! 🎉" : "Computer Won! 🤖"}
                 </h2>
               </div>
             ) : (
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">
                   {isXNext ? "Your Turn! (X)" : "Computer's Turn... (O)"}
                 </h2>
                 {!isXNext && (
-                  <div className="text-xl text-muted-foreground animate-pulse">
+                  <div className="text-base sm:text-lg md:text-xl text-muted-foreground animate-pulse">
                     Thinking...
                   </div>
                 )}
@@ -175,13 +176,13 @@ const TicTacToe = () => {
           </div>
 
           {/* Board */}
-          <div className="grid grid-cols-3 gap-3 max-w-md mx-auto mb-8">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-xs sm:max-w-md mx-auto mb-6 sm:mb-8">
             {board.map((cell, index) => (
               <button
                 key={index}
                 onClick={() => handleClick(index)}
                 disabled={!isXNext || !!cell || !!winner}
-                className={`aspect-square rounded-2xl text-5xl font-bold transition-all duration-300 ${
+                className={`aspect-square rounded-xl sm:rounded-2xl text-3xl sm:text-4xl md:text-5xl font-bold transition-all duration-300 ${
                   winningLine.includes(index)
                     ? "bg-success text-white scale-110"
                     : cell === "X"
@@ -202,7 +203,7 @@ const TicTacToe = () => {
 
           {/* Instructions */}
           <div className="text-center text-muted-foreground">
-            <p className="text-lg">
+            <p className="text-sm sm:text-base md:text-lg">
               {winner
                 ? "Click 'New Game' to play again!"
                 : "Get 3 in a row to win! You are X, Computer is O"}

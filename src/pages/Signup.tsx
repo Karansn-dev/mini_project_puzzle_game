@@ -44,20 +44,20 @@ const Signup = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <ThreeBackground />
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-6">
         <Card className="w-full max-w-md bg-card/80 backdrop-blur-xl border-2 shadow-2xl">
-          <CardHeader className="space-y-1 text-center">
+          <CardHeader className="space-y-1 text-center px-4 sm:px-6 pt-6 sm:pt-8">
             <div className="flex justify-center mb-4">
-              <Gamepad2 className="w-12 h-12 text-primary animate-pulse" />
+              <Gamepad2 className="w-10 h-10 sm:w-12 sm:h-12 text-primary animate-pulse" />
             </div>
-            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+            <CardTitle className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
               Create Account
             </CardTitle>
-            <CardDescription className="text-base">
+            <CardDescription className="text-sm sm:text-base">
               Join the futuristic gaming platform
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 px-4 sm:px-6 pb-6 sm:pb-8">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="displayName">Display Name</Label>

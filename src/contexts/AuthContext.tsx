@@ -3,7 +3,8 @@ import {
   User,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged,
   updateProfile,
@@ -85,12 +86,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // Google Sign-In
+  // Google Login (Redirect method - NO popup issues)
   const loginWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      await createUserProfile(result.user);
-      toast.success("Signed in with Google! 🎉");
+      await signInWithRedirect(auth, googleProvider);
     } catch (error: any) {
       toast.error(error.message || "Failed to sign in with Google");
       throw error;
@@ -108,7 +107,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // Listen for auth state changes
+  // Handle Google redirect result (after returning from Google page)
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result && result.user) {
+          await createUserProfile(result.user);
+          toast.success("Signed in with Google! 🎉");
+        }
+      })
+      .catch((error) => {
+        if (error) toast.error(error.message);
+      });
+  }, []);
+
+  // Listen for auth state changes (keeps user logged in)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -129,4 +142,3 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 };
-

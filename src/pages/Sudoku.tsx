@@ -253,18 +253,18 @@ const Sudoku = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <ThreeBackground />
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <Link to="/">
-            <Button variant="outline" className="gap-2">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 mb-4 sm:mb-6">
+          <Link to="/" className="w-full sm:w-auto">
+            <Button variant="outline" className="gap-2 w-full sm:w-auto text-sm">
               <Home className="w-4 h-4" />
               Home
             </Button>
           </Link>
-          <div className="flex gap-4 items-center">
-            <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+            <div className="flex gap-2 flex-1 sm:flex-initial">
               <Select value={difficulty} onValueChange={(v) => setDifficulty(v as Difficulty)} disabled={gameStarted}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-full sm:w-32 text-xs sm:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -274,7 +274,7 @@ const Sudoku = () => {
                 </SelectContent>
               </Select>
               <Select value={mode} onValueChange={(v) => setMode(v as GameMode)} disabled={gameStarted}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full sm:w-40 text-xs sm:text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -283,50 +283,51 @@ const Sudoku = () => {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={initializeGame} className="gap-2">
+            <Button onClick={initializeGame} className="gap-2 text-sm whitespace-nowrap">
               <RotateCcw className="w-4 h-4" />
-              {gameStarted ? "Restart" : "Start Game"}
+              <span className="hidden sm:inline">{gameStarted ? "Restart" : "Start Game"}</span>
+              <span className="sm:hidden">{gameStarted ? "Restart" : "Start"}</span>
             </Button>
           </div>
         </div>
 
-        <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl p-6 mb-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <Card className="bg-card/80 backdrop-blur-xl border-2 shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
             <div>
-              <p className="text-sm text-muted-foreground">Moves</p>
-              <p className="text-2xl font-bold">{moves}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Moves</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold">{moves}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Time</p>
-              <p className="text-2xl font-bold flex items-center justify-center gap-1">
-                <Clock className="w-5 h-5" />
+              <p className="text-xs sm:text-sm text-muted-foreground">Time</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold flex items-center justify-center gap-1">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
                 {formatTime(time)}
               </p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Errors</p>
-              <p className="text-2xl font-bold text-destructive">{errors}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Errors</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-destructive">{errors}</p>
             </div>
             {mode === "friend" && (
               <div>
-                <p className="text-sm text-muted-foreground">Current Player</p>
-                <p className="text-2xl font-bold">{currentPlayer === "player1" ? "Player 1" : "Player 2"}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Current Player</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-bold truncate">{currentPlayer === "player1" ? "Player 1" : "Player 2"}</p>
               </div>
             )}
           </div>
         </Card>
 
         {gameWon && (
-          <Card className="bg-success/20 border-success mb-6 text-center p-6">
-            <Trophy className="w-16 h-16 text-success mx-auto mb-4" />
-            <h2 className="text-3xl font-bold mb-2">Sudoku Solved! 🎉</h2>
-            <p className="text-lg">Completed in {formatTime(time)} with {moves} moves!</p>
+          <Card className="bg-success/20 border-success mb-4 sm:mb-6 text-center p-4 sm:p-6">
+            <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-success mx-auto mb-4" />
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">Sudoku Solved! 🎉</h2>
+            <p className="text-sm sm:text-base md:text-lg">Completed in {formatTime(time)} with {moves} moves!</p>
           </Card>
         )}
 
         {gameStarted && (
-          <div className="max-w-2xl mx-auto">
-            <div className="grid grid-cols-9 gap-1 bg-foreground/1 p-2 rounded-lg border-2">
+          <div className="max-w-full sm:max-w-2xl mx-auto overflow-hidden">
+            <div className="grid grid-cols-9 gap-0.5 sm:gap-1 bg-foreground/10 p-1 sm:p-2 rounded-lg border-2">
               {grid.map((row, rowIdx) =>
                 row.map((cell, colIdx) => {
                   const isSelected =
@@ -340,7 +341,7 @@ const Sudoku = () => {
                       key={`${rowIdx}-${colIdx}`}
                       onClick={() => handleCellClick(rowIdx, colIdx)}
                       disabled={cell.isGiven || gameWon}
-                      className={`aspect-square rounded text-lg font-bold transition-all ${
+                      className={`aspect-square rounded text-xs sm:text-sm md:text-base lg:text-lg font-bold transition-all ${
                         cell.isGiven
                           ? "bg-primary/20 text-primary font-extrabold cursor-default"
                           : cell.isError
@@ -357,14 +358,14 @@ const Sudoku = () => {
               )}
             </div>
 
-            <div className="mt-6 flex flex-col gap-4">
-              <div className="grid grid-cols-5 gap-2">
+            <div className="mt-4 sm:mt-6 flex flex-col gap-3 sm:gap-4">
+              <div className="grid grid-cols-5 sm:grid-cols-9 gap-1.5 sm:gap-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                   <Button
                     key={num}
                     onClick={() => handleNumberInput(num)}
                     disabled={!selectedCell || gameWon}
-                    className="text-xl font-bold h-12"
+                    className="text-base sm:text-lg md:text-xl font-bold h-10 sm:h-12"
                   >
                     {num}
                   </Button>
@@ -374,7 +375,7 @@ const Sudoku = () => {
                 onClick={handleClearCell}
                 disabled={!selectedCell || gameWon}
                 variant="outline"
-                className="gap-2"
+                className="gap-2 text-sm sm:text-base"
               >
                 <Eraser className="w-4 h-4" />
                 Clear
@@ -384,12 +385,12 @@ const Sudoku = () => {
         )}
 
         {!gameStarted && (
-          <Card className="bg-card/80 backdrop-blur-xl border-2 text-center p-12 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Sudoku</h2>
-            <p className="text-muted-foreground mb-6">
+          <Card className="bg-card/80 backdrop-blur-xl border-2 text-center p-6 sm:p-8 md:p-12 max-w-2xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">Sudoku</h2>
+            <p className="text-sm sm:text-base text-muted-foreground mb-6">
               Fill the 9x9 grid so that each row, column, and 3x3 box contains all digits from 1 to 9.
             </p>
-            <div className="space-y-2 text-left max-w-md mx-auto">
+            <div className="space-y-2 text-left max-w-md mx-auto text-sm sm:text-base">
               <p><strong>Easy:</strong> 40+ clues</p>
               <p><strong>Medium:</strong> 30 clues</p>
               <p><strong>Hard:</strong> 20 clues</p>

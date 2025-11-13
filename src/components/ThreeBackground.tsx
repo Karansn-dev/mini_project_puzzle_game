@@ -41,7 +41,9 @@ export const ThreeBackground = () => {
       rendererRef.current = renderer;
 
       // === Particles ===
-      const particleCount = 1000;
+      // Reduce particle count on mobile for better performance
+      const isMobile = window.innerWidth < 768;
+      const particleCount = isMobile ? 300 : 1000;
       const particles = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const colors = new Float32Array(particleCount * 3);
@@ -64,10 +66,10 @@ export const ThreeBackground = () => {
       particles.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const particleMaterial = new THREE.PointsMaterial({
-        size: 0.05,
+        size: isMobile ? 0.03 : 0.05,
         vertexColors: true,
         transparent: true,
-        opacity: 0.8,
+        opacity: isMobile ? 0.6 : 0.8,
         blending: THREE.AdditiveBlending,
       });
 
@@ -75,13 +77,15 @@ export const ThreeBackground = () => {
       scene.add(particleSystem);
 
       // === Glowing orbs ===
+      // Reduce orb count on mobile
+      const orbCount = isMobile ? 3 : 5;
       const orbs: any[] = [];
-      for (let i = 0; i < 5; i++) {
-        const geometry = new THREE.SphereGeometry(0.3, 32, 32);
+      for (let i = 0; i < orbCount; i++) {
+        const geometry = new THREE.SphereGeometry(0.3, isMobile ? 16 : 32, isMobile ? 16 : 32);
         const material = new THREE.MeshBasicMaterial({
           color: i % 2 === 0 ? color1 : color2,
           transparent: true,
-          opacity: 0.3,
+          opacity: isMobile ? 0.2 : 0.3,
         });
         const orb = new THREE.Mesh(geometry, material);
         orb.position.set(
@@ -93,23 +97,28 @@ export const ThreeBackground = () => {
         orbs.push(orb);
       }
 
-      const gridHelper = new THREE.GridHelper(20, 20, color1, color2);
-      (gridHelper.material as any).opacity = 0.2;
+      // Reduce grid complexity on mobile
+      const gridSize = isMobile ? 10 : 20;
+      const gridDivisions = isMobile ? 10 : 20;
+      const gridHelper = new THREE.GridHelper(gridSize, gridDivisions, color1, color2);
+      (gridHelper.material as any).opacity = isMobile ? 0.1 : 0.2;
       (gridHelper.material as any).transparent = true;
       scene.add(gridHelper);
 
+      // Optimize animation speed for mobile
+      const animationSpeed = isMobile ? 0.5 : 1;
       const animate = () => {
         animationFrameRef.current = requestAnimationFrame(animate);
-        particleSystem.rotation.y += 0.001;
-        particleSystem.rotation.x += 0.0005;
+        particleSystem.rotation.y += 0.001 * animationSpeed;
+        particleSystem.rotation.x += 0.0005 * animationSpeed;
 
         orbs.forEach((orb, i) => {
-          orb.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01;
-          orb.rotation.x += 0.01;
-          orb.rotation.y += 0.01;
+          orb.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01 * animationSpeed;
+          orb.rotation.x += 0.01 * animationSpeed;
+          orb.rotation.y += 0.01 * animationSpeed;
         });
 
-        gridHelper.rotation.z += 0.0005;
+        gridHelper.rotation.z += 0.0005 * animationSpeed;
         renderer.render(scene, camera);
       };
 
