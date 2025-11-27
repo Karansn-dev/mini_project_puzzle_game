@@ -1,8 +1,8 @@
-# Welcome to your Lovable project
+# MINI_PROJECT
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/d9907d96-484e-4e30-a034-64285bd13533
+**URL**: https://miniproject-25331.web.app/login
 
 ## How can I edit this code?
 
