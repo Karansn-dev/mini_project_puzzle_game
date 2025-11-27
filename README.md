@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://miniproject-25331.web.app/login
+**URL**: https://miniproject-25331.web.app
 
 ## How can I edit this code?
 
